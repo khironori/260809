@@ -1,0 +1,17 @@
+title = "gitleaks config"
+
+[extend]
+useDefault = true
+
+# プロジェクト固有のパターンを追加(必要に応じて調整)
+[[rules]]
+id = "kabustation-api-key"
+description = "kabuStation API Key pattern"
+regex = '''(?i)kabustation[_-]?(api[_-]?key|password)\s*[:=]\s*["']?[A-Za-z0-9\-_]{8,}["']?'''
+tags = ["key", "kabustation"]
+
+[allowlist]
+paths = [
+  '''\.env\.example$''',
+  '''README\.md$''',
+]

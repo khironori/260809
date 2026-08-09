@@ -1,0 +1,52 @@
+# === 機密情報・認証情報 ===
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+secrets.json
+secrets.yaml
+credentials.json
+config.local.*
+*_credentials.*
+*_secret.*
+*_secrets.*
+token.txt
+api_key.txt
+
+# APIキーやトークンを含みがちな設定ファイル
+config/secrets.*
+settings.local.py
+local_settings.py
+
+# === 証券会社・取引API系(kabuStation等) ===
+kabustation_config.*
+trading_config.local.*
+*.session
+
+# === Python ===
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+
+# === Node.js ===
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# === OS/エディタ ===
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# === ログ・データ(機密含む可能性) ===
+*.log
+logs/
+data/private/
