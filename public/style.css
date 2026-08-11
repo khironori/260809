@@ -1,0 +1,430 @@
+:root {
+  --bg: #f5f6f8;
+  --panel: #ffffff;
+  --border: #d8dce3;
+  --text: #1c2230;
+  --muted: #67707f;
+  --accent: #1c5fbe;
+  --accent-weak: #e8f0fc;
+  --warn-bg: #fff4e5;
+  --warn-border: #f0c07a;
+  --error-bg: #fdecec;
+  --error-border: #e0a0a0;
+  --self: #1c5fbe;
+  --subject: #9a5000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0 20px 60px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Yu Gothic UI", "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ---------- ヘッダ ---------- */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin: 0 -20px 16px;
+  padding: 14px 20px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.status {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.inline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.inline input {
+  width: 70px;
+}
+
+/* ---------- 部品 ---------- */
+
+button {
+  padding: 6px 14px;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  background: var(--accent);
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+button.secondary {
+  background: var(--panel);
+  color: var(--accent);
+}
+
+button.link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--accent);
+  font-size: 12px;
+  text-decoration: underline;
+}
+
+input,
+select {
+  padding: 5px 8px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+}
+
+input:focus,
+select:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+}
+
+.panel {
+  margin-bottom: 14px;
+  padding: 14px 16px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+/* ---------- 検索フォーム ---------- */
+
+.search-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px 16px;
+  align-items: start;
+}
+
+.search-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.hint {
+  font-weight: 400;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.doctype-field {
+  grid-row: span 2;
+}
+
+.doctype-presets {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.search-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  grid-column: 1 / -1;
+}
+
+.checkbox {
+  flex-direction: row !important;
+  align-items: center;
+  gap: 5px !important;
+  font-weight: 400 !important;
+  margin-right: auto;
+}
+
+/* ---------- 折りたたみ ---------- */
+
+.collapsible {
+  padding: 0;
+}
+
+.collapse-toggle {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: var(--text);
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.collapse-toggle:hover {
+  background: var(--accent-weak);
+  filter: none;
+}
+
+.caret {
+  display: inline-block;
+  width: 12px;
+  color: var(--muted);
+  font-size: 10px;
+  transition: transform 0.12s;
+}
+
+.collapse-toggle[aria-expanded="true"] .caret {
+  transform: rotate(90deg);
+}
+
+.collapse-body {
+  padding: 0 16px 14px;
+}
+
+.badge {
+  display: inline-block;
+  min-width: 20px;
+  padding: 0 6px;
+  border-radius: 9px;
+  background: var(--accent-weak);
+  color: var(--accent);
+  text-align: center;
+  font-size: 11.5px;
+}
+
+/* ---------- 通知バナー ---------- */
+
+.banner {
+  margin-bottom: 14px;
+  padding: 10px 14px;
+  border: 1px solid var(--warn-border);
+  border-radius: 6px;
+  background: var(--warn-bg);
+  font-size: 13px;
+  white-space: pre-wrap;
+}
+
+.banner.error {
+  border-color: var(--error-border);
+  background: var(--error-bg);
+}
+
+/* ---------- 結果 ---------- */
+
+.result-summary {
+  margin: 4px 2px 10px;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+.group {
+  margin-bottom: 14px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.group-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: baseline;
+  padding: 9px 14px;
+  background: #eef1f6;
+  border-bottom: 1px solid var(--border);
+}
+
+.group-code {
+  font-family: ui-monospace, "SF Mono", Consolas, monospace;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.group-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.group-meta {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.tag {
+  padding: 1px 7px;
+  border-radius: 3px;
+  background: #dfe4ec;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.tag.outside {
+  background: #f3e3cc;
+  color: var(--subject);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 7px 10px;
+  border-bottom: 1px solid #eceff3;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #fafbfc;
+  color: var(--muted);
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+tbody tr:hover {
+  background: #f7f9fc;
+}
+
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+td.code,
+td.date {
+  font-family: ui-monospace, "SF Mono", Consolas, monospace;
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+
+td.doctype {
+  white-space: nowrap;
+}
+
+td.desc {
+  width: 40%;
+  color: #2c3444;
+}
+
+td.links {
+  white-space: nowrap;
+}
+
+td.links a {
+  display: inline-block;
+  margin-right: 8px;
+  color: var(--accent);
+  font-size: 12.5px;
+}
+
+.role {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 5px;
+  border-radius: 3px;
+  background: #f3e3cc;
+  color: var(--subject);
+  font-size: 11px;
+  vertical-align: 1px;
+}
+
+.withdrawn {
+  color: #9a2020;
+  font-size: 12px;
+}
+
+.empty {
+  padding: 40px 20px;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ---------- 未マッチ / 監視銘柄一覧 ---------- */
+
+.mini-table {
+  font-size: 12.5px;
+}
+
+.mini-table td,
+.mini-table th {
+  padding: 4px 10px 4px 0;
+  border: 0;
+}
+
+.reason {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.suggest {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.suggest code {
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: #eef1f6;
+  font-size: 11.5px;
+}
+
+.foot {
+  margin-top: 28px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.foot p {
+  margin: 4px 0;
+}
+
+.foot code {
+  font-size: 11.5px;
+}

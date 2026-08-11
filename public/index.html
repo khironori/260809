@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EDINET 監視銘柄 提出書類一覧</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-main">
+        <h1>EDINET 監視銘柄 提出書類一覧</h1>
+        <p class="status" id="status">読み込み中…</p>
+      </div>
+      <div class="topbar-actions">
+        <label class="inline">
+          取得日数
+          <input type="number" id="refreshDays" min="1" max="3650" step="1" />
+        </label>
+        <button id="refreshBtn" type="button">再取得</button>
+        <button id="refreshForceBtn" type="button" class="secondary" title="キャッシュを無視してEDINETから取り直します">
+          強制再取得
+        </button>
+      </div>
+    </header>
+
+    <div id="banner" class="banner" hidden></div>
+
+    <section class="panel">
+      <form id="searchForm" class="search-grid" autocomplete="off">
+        <label>
+          証券コード<span class="hint">部分一致 / 4桁・5桁どちら可</span>
+          <input type="text" id="qCode" placeholder="例: 7203, 72030, 720" />
+        </label>
+
+        <label>
+          提出者名・銘柄名<span class="hint">部分一致</span>
+          <input type="text" id="qName" placeholder="例: トヨタ" />
+        </label>
+
+        <label>
+          提出日（開始）
+          <input type="date" id="qFrom" />
+        </label>
+
+        <label>
+          提出日（終了）
+          <input type="date" id="qTo" />
+        </label>
+
+        <label>
+          突合の種類<span class="hint">大量保有報告書等は「対象会社」側で突合</span>
+          <select id="qRole">
+            <option value="all">すべて</option>
+            <option value="self">自社提出のみ</option>
+            <option value="subject">対象会社として（大量保有・TOB等）</option>
+            <option value="issuer">発行会社として</option>
+            <option value="subsidiary">子会社として</option>
+          </select>
+        </label>
+
+        <label>
+          検索範囲
+          <select id="qScope">
+            <option value="watchlist">監視銘柄＋証券コード指定分</option>
+            <option value="all-edinet">証券コード指定分のみ（stocklist外）</option>
+          </select>
+        </label>
+
+        <label class="doctype-field">
+          書類種別<span class="hint">Ctrl/⌘＋クリックで複数選択・未選択ですべて</span>
+          <select id="qDocType" multiple size="8"></select>
+          <div class="doctype-presets">
+            <button type="button" data-preset="clear" class="link">選択解除</button>
+            <button type="button" data-preset="timely" class="link">適時開示系のみ</button>
+            <button type="button" data-preset="periodic" class="link">定期報告書のみ</button>
+          </div>
+        </label>
+
+        <div class="search-actions">
+          <label class="checkbox">
+            <input type="checkbox" id="qExcludeWithdrawn" checked />
+            取下げ書類を除く
+          </label>
+          <button type="submit">検索</button>
+          <button type="button" id="resetBtn" class="secondary">条件クリア</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel collapsible" id="unmatchedPanel" hidden>
+      <button type="button" class="collapse-toggle" id="unmatchedToggle">
+        <span class="caret">▶</span> 未マッチ銘柄 <span class="badge" id="unmatchedCount">0</span>
+      </button>
+      <div class="collapse-body" id="unmatchedBody" hidden></div>
+    </section>
+
+    <section class="panel collapsible" id="watchlistPanel" hidden>
+      <button type="button" class="collapse-toggle" id="watchlistToggle">
+        <span class="caret">▶</span> 監視銘柄一覧 <span class="badge" id="watchlistCount">0</span>
+      </button>
+      <div class="collapse-body" id="watchlistBody" hidden></div>
+    </section>
+
+    <p class="result-summary" id="resultSummary"></p>
+    <main id="results"></main>
+
+    <footer class="foot">
+      <p>
+        リンクは EDINET 書類取得API（<code>/api/v2/documents/{docID}</code>）へのローカルプロキシです。APIキーはサーバ側でのみ付与され、このページには含まれません。
+      </p>
+      <p>EDINET の書類閲覧ページへの直リンクは、公式に仕様が公開されていないため実装していません（README 参照）。</p>
+    </footer>
+
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>

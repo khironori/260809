@@ -1,0 +1,24 @@
+{
+  "name": "edinet-watchlist",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "EDINET API v2 を使った監視銘柄の提出書類一覧ビューア（ローカル実行）",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "codes": "node src/cli.js codes",
+    "codes:update": "node src/cli.js codes --download",
+    "fetch": "node src/cli.js fetch",
+    "check": "node src/cli.js check"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  },
+  "optionalDependencies": {
+    "nodemailer": "^6.9.14"
+  }
+}

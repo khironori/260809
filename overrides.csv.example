@@ -1,0 +1,12 @@
+# 証券コードで突合できない銘柄を手動で対応付けるファイル。
+# 使う場合は overrides.csv にリネームしてください（cp overrides.csv.example overrides.csv）。
+#
+# REIT（投資法人）・ETF は EdinetcodeDlInfo.csv の「証券コード」列が空のため、
+# 証券コードでは EDINETコードに突合できません。ここで直接対応付けます。
+#
+# EDINETコードは `npm run codes` の未マッチ一覧に表示される候補、または
+# EdinetcodeDlInfo.csv を提出者名で検索して確認してください。
+#
+# 形式: 証券コード(4桁),EDINETコード(E+5桁)
+証券コード,EDINETコード
+#3472,E32428
